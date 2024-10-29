@@ -44,7 +44,6 @@ class _NameTrackerState extends State<NameTracker> {
     super.dispose();
   }
 
-
   Future<void> _loadData() async {
     try {
       if (!Hive.isBoxOpen(widget.boxTitle)) {
@@ -63,6 +62,7 @@ class _NameTrackerState extends State<NameTracker> {
         // Parsing logic remains the same...
 
         print('Data successfully loaded and parsed: $data');
+      
       } else {
         print('No data found for key "data"');
       }
@@ -70,7 +70,6 @@ class _NameTrackerState extends State<NameTracker> {
       print('Error loading data: $e');
     }
   }
-
 
   Future<void> _connect() async {
     if (widget.server == null) return;
@@ -148,7 +147,7 @@ class _NameTrackerState extends State<NameTracker> {
     try {
       if (!Hive.isBoxOpen(widget.boxTitle)) {
         print('Opening box: ${widget.boxTitle}');
-        await Hive.openBox(widget.boxTitle);
+        await Hive.openBox<Map<String, dynamic>>(widget.boxTitle);
       } else {
         print('Box ${widget.boxTitle} is already open');
       }
