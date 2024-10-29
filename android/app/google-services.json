@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "612684328267",
+    "project_id": "attendace-e7b79",
+    "storage_bucket": "attendace-e7b79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612684328267:android:c341da73f8352f45584cce",
+        "android_client_info": {
+          "package_name": "com.example.trial"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNqfRmVU407TanyGC91V_jWpK3sIZIlTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
