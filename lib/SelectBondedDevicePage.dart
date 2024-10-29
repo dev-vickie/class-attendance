@@ -17,31 +17,32 @@ class _SelectBondedDevicePageState extends State<SelectBondedDevicePage> {
   @override
   void initState() {
     super.initState();
-    _getBondedDevices();
-  }
-
-  void _getBondedDevices() async {
-    devices = await FlutterBluetoothSerial.instance.getBondedDevices();
-    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Select bonded device')),
-      body: ListView.builder(
-        itemCount: devices.length,
-        itemBuilder: (BuildContext context, index) {
-          BluetoothDevice device = devices[index];
-          return ListTile(
-            title: Text(device.name ?? "Unknown device"),
-            subtitle: Text(device.address),
-            onTap: () {
-              Navigator.of(context).pop(device);
-            },
-          );
-        },
-      ),
+      appBar: AppBar(title:  Text('Select bonded device')),
+      body: FutureBuilder(
+          future: FlutterBluetoothSerial.instance.getBondedDevices(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            }
+            return ListView.builder(
+              itemCount: devices.length,
+              itemBuilder: (BuildContext context, index) {
+                BluetoothDevice device = devices[index];
+                return ListTile(
+                  title: Text(device.name ?? "Unknown device"),
+                  subtitle: Text(device.address),
+                  onTap: () {
+                    Navigator.of(context).pop(device);
+                  },
+                );
+              },
+            );
+          }),
     );
   }
 }

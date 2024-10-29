@@ -22,8 +22,12 @@ class _UnitTrackerPageState extends State<UnitTrackerPage> {
     enteredTexts = []; // Initialize here if necessary
   }
 
-  Future<void> openBox() async {
-    box = await Hive.openBox<String>('nameBox');
+ Future<void> openBox() async {
+    if (!Hive.isBoxOpen('nameBox')) {
+      box = await Hive.openBox<String>('nameBox');
+    } else {
+      box = Hive.box<String>('nameBox');
+    }
     enteredTexts = box.values.toList();
     setState(() {});
   }
@@ -31,7 +35,6 @@ class _UnitTrackerPageState extends State<UnitTrackerPage> {
   Future<void> saveAndNavigate(String pageTitle) async {
     if (pageTitle.isNotEmpty) {
       await box.put('latestPageTitle', pageTitle);
-
       enteredTexts.add(pageTitle);
       unitTitleController.clear();
       setState(() {});
@@ -46,9 +49,7 @@ class _UnitTrackerPageState extends State<UnitTrackerPage> {
       MaterialPageRoute(
         builder: (context) => NameTracker(
           appBarTitle: pageTitle,
-          boxTitles: enteredTexts,
-          boxTitle: '',
-          hiveboxTitle: '',
+          boxTitle: pageTitle,
         ),
       ),
     );

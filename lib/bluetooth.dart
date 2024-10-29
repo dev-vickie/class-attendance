@@ -65,9 +65,7 @@ class _MainPageState extends State<MainPage> {
                     builder: (context) => NameTracker(
                       server: selectedDevice,
                       appBarTitle: pageTitle,
-                      boxTitle: '',
-                      hiveboxTitle: '',
-                      boxTitles: UnitTrackerPage.enteredTexts,
+                      boxTitle: pageTitle,
                     ),
                   ),
                 );
@@ -93,9 +91,7 @@ class _MainPageState extends State<MainPage> {
                     builder: (context) => NameTracker(
                       server: selectedDevice,
                       appBarTitle: pageTitle,
-                      boxTitle: '',
-                      hiveboxTitle: '',
-                      boxTitles: UnitTrackerPage.enteredTexts,
+                      boxTitle: pageTitle,
                     ),
                   ),
                 );

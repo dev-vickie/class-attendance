@@ -12,14 +12,11 @@ class NameTracker extends StatefulWidget {
   final BluetoothDevice? server;
   final String appBarTitle;
   final String boxTitle;
-  final List boxTitles;
 
   NameTracker({
     required this.appBarTitle,
     required this.boxTitle,
-    required this.boxTitles,
     this.server,
-    required String hiveboxTitle,
   });
 
   @override
@@ -47,13 +44,12 @@ class _NameTrackerState extends State<NameTracker> {
     super.dispose();
   }
 
+
   Future<void> _loadData() async {
     try {
       if (!Hive.isBoxOpen(widget.boxTitle)) {
-        await Hive.openBox(widget.boxTitle);
-      } else {
-        print('Box ${widget.boxTitle} is already open');
-      }
+        await Hive.openBox<Map<String, dynamic>>(widget.boxTitle);
+      } 
 
       Box<Map<String, dynamic>> nameBox =
           Hive.box<Map<String, dynamic>>(widget.boxTitle);
@@ -74,6 +70,7 @@ class _NameTrackerState extends State<NameTracker> {
       print('Error loading data: $e');
     }
   }
+
 
   Future<void> _connect() async {
     if (widget.server == null) return;
